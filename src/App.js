@@ -14,12 +14,7 @@ class App extends Component {
 
   handleClick = event => {
     const { name } = event.currentTarget;
-
-    this.setState(prevState => {
-      return {
-        [name]: prevState[name] + 1,
-      };
-    });
+    this.setState(prevState => ({ [name]: prevState[name] + 1}));
   };
 
   countTotalFeedback = () => {
