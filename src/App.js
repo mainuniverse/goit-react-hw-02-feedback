@@ -3,6 +3,7 @@ import Container from './components/Container/Container';
 import Section from './components/Section/Section';
 import FeedbackOptions from './components/FeedbackOptions/FeedbackOptions';
 import Statistics from './components/Statistics/Statistics';
+//import Notification from './components/Notification/Notification';
 import './App.css';
 
 class App extends Component {
@@ -12,22 +13,31 @@ class App extends Component {
     bad: 0,
   };
 
-  handleClick = event => {
-    const { name } = event.currentTarget;
-    this.setState(prevState => ({ [name]: prevState[name] + 1}));
+    handleClick = feedbackName => {
+    this.setState(prevState => {
+      return {
+        [feedbackName]: prevState[feedbackName] + 1,
+      };
+    });
   };
+ ;
+
+//   handleClick = event => {
+// const { name } = event.currentTarget;
+// this.setState(prevState => ({ [name]: prevState[name] + 1}));
+// };
 
   countTotalFeedback = () => {
-    return this.state.good + this.state.neutral + this.state.bad;
+     const { good, neutral, bad } = this.state;
+        return good + neutral + bad;
   };
 
   countPositiveFeedbackPercentage = () => {
-    if (this.countTotalFeedback() > 0) {
-      return Math.round((this.state.good / this.countTotalFeedback()) * 100);
-    }
-    return 0;
+           const { good } = this.state;
+        const total = this.countTotalFeedback();
+        return total ? Math.round((good / total) * 100) : 0;
   };
-
+  
   render() {
     const { good, neutral, bad } = this.state;
 
@@ -41,6 +51,7 @@ class App extends Component {
         </Section>
 
         <Section title="Statistics">
+          
           <Statistics
             good={good}
             neutral={neutral}
