@@ -6,7 +6,7 @@ const FeedbackOptions = ({ options, onLeaveFeedback }) => {
     <div className={style.feedbackList}>
       {options.map(key => {
         return (
-          <button key={key} type="button" name={key} onClick={onLeaveFeedback}>
+          <button key={key} type="button" name={key} onClick={() => onLeaveFeedback(key)}>
             {key}
           </button>
         );
@@ -14,6 +14,8 @@ const FeedbackOptions = ({ options, onLeaveFeedback }) => {
     </div>
   );
 };
+
+
 
 FeedbackOptions.PropsType = {
   options: PropsType.arrayOf(PropsType.string).isRequired,
